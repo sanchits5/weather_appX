@@ -1,0 +1,106 @@
+body {
+    background: linear-gradient(rgba(1, 1, 1, 0.5), rgba(1, 1, 1, 0.5)), url('/images/wallpaper.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+.container {
+    margin-top: 200px;
+
+}
+.card {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 5);
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 300px;
+        height: 300px;
+        margin: auto;
+
+}
+.card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.card a
+{
+    font-size:16px;
+    color:white;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.form-control {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.form-control:focus {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+@media (max-width: 768px) {
+    .container {
+        margin-top: 750px; /* Reduced margin for better centering */
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px; /* Space between elements */
+        width: 100%;
+    }
+
+    .card {
+        width: 90%; /* Responsive width */
+        max-width: 280px; /* Better sizing */
+        height: 320px; /* Fixed height for consistency */
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .card a {
+        font-size: 16px;
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin-top: 10px;
+    }
+
+    .form-control {
+        width: 90%;
+        font-size: 16px;
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+    }
+
+    .form-control:focus {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+}

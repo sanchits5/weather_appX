@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+}
+
+/* Header */
+.heading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Grid Layout */
+.container {
+    display: grid;
+    width: 90%;
+    padding: 50px;
+    margin-top: 30px;
+    overflow: hidden;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    gap: 15px;
+    transition: filter 0.3s ease;
+}
+
+/* Card Styling */
+.card,.card1 {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 100%;
+    height: 250px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+}
+
+
+/* Card Hover Effect */
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Active Card Expansion */
+.card.active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: fit-content;
+    height: fit-content;
+    transform: translate(-50%, -50%) scale(1.2);
+    z-index: 10;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-details {
+    display: none;
+    margin-top: 15px; /* Hide details initially */
+}
+
+/* Show details only when card is active */
+.card.active .card-details {
+    display: block;
+}
+
+/* Blur effect on other cards when one is expanded */
+.container.blur .card:not(.active) {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.container.blur .card1:not(.active) {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+
+/* Blur effect on other cards */
+.container.blur .card:not(.active) {
+    filter: blur(7px);
+    pointer-events: none;
+}
+
+/* Map */
+.map {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* Typography */
+.p-1 {
+    font-size: 20px;
+    text-decoration: underline;
+    font-weight: bolder;
+    color: #333;
+    margin-top: 5px;
+    font-family: calibri;
+    text-align: center;
+}
+.p-2 {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+.p-3 {
+    text-align: center;
+}
+
+/* Image */
+.imag1 {
+    display: block;
+    margin: 15px auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+}
+
+/* Hide default zoom buttons on Leaflet map */
+.leaflet-touch .leaflet-bar a:first-child {
+    display: none;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+.leaflet-touch .leaflet-bar a:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    display: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .card.active {
+        width: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto auto auto;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .card,.card1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .card:nth-child(1)
+    {
+        grid-column: span 2; /* Make it full width */
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+    .card:nth-child(6),
+    .card:nth-child(4),
+    .card:nth-child(3),
+    .card:nth-child(5) {
+        grid-column: span 1;
+    }
+
+    .card1:nth-child(2)
+     {
+        grid-column: span 2; /* Two columns */
+    }
+}
