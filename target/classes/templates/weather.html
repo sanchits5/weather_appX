@@ -44,9 +44,6 @@
     <div class="card">
         <p class="p-1">Meteorological Data</p>
         <img src="/images/wind.gif" class="imag1">
-        <div class="title">
-            <p class="p-2"><strong>Wind Speed:</strong> <span th:text="${windSpeed}">Wind Speed</span> m/s </p>
-        </div>
         <div class="card-details">
             <p class="p-2"><strong>Humidity:</strong> <span th:text="${humidity}">Humidity</span>%</p>
             <br>
@@ -65,10 +62,6 @@
     <div class="card">
         <p class="p-1">Barometric Pressure</p>
         <img src="/images/Meter.gif" class="imag1">
-        <div class="title">
-            <p class="p-2"><strong>Atmospheric Pressure:</strong> <span th:text="${pressure}">Atmospheric
-                            Pressure</span> hPa </p>
-        </div>
         <div class="card-details">
             <p class="p-2"><strong>Atmospheric Pressure:</strong> <span th:text="${pressure}">Atmospheric
                             Pressure</span> hPa </p>
@@ -83,8 +76,6 @@
     <div class="card">
         <p class="p-1">Geographic Coordinates</p>
         <img src="/images/GeographicalCode.gif" class="imag1">
-        <p class="p-2"><strong>Weather Parameters:</strong> <span th:text="${main}">Weather
-                            Parameters</span></p>
         <div class="card-details">
             <p class="p-2"><strong>Longitude:</strong> <span th:text="${longitude}">Longitude</span>°</p>
             <br>

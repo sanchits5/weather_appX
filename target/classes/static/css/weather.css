@@ -125,7 +125,7 @@ body {
     text-align: center;
 }
 .p-2 {
-    font-size: 14px;
+    font-size: 12px;
     color: #333;
     text-align: center;
 }
@@ -137,8 +137,8 @@ body {
 .imag1 {
     display: block;
     margin: 15px auto;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 8px;
 }
 
@@ -161,15 +161,6 @@ body {
     }
 }
 
-@media (max-width: 768px) {
-    .container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .card.active {
-        width: 80%;
-    }
-}
-
 @media (max-width: 500px) {
     .container {
         display: grid;
@@ -178,7 +169,9 @@ body {
         gap: 10px;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        overflow-y: auto; /* Enables scrolling */
+        max-height: 100vh; /* Prevents overflow issues */
+        padding: 10px;
     }
 
     .card,.card1 {
@@ -191,22 +184,28 @@ body {
         text-align: center;
     }
 
-    .card:nth-child(1)
-    {
-        grid-column: span 2; /* Make it full width */
-        display: flex;
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
+    /* First Card - Full Width & Centered */
+    .card:nth-child(1) {
+        grid-column: span 2;
+        margin-top: 30px;
     }
-    .card:nth-child(6),
-    .card:nth-child(4),
+
+    /* Other Cards - Stay in 1 Column */
     .card:nth-child(3),
-    .card:nth-child(5) {
+    .card:nth-child(4),
+    .card:nth-child(5),
+    .card:nth-child(6) {
         grid-column: span 1;
     }
 
-    .card1:nth-child(2)
-     {
-        grid-column: span 2; /* Two columns */
+    /* Second Card - Full Width (if it's a Map) */
+    .card1:nth-child(2) {
+        grid-column: span 2;
     }
+}
+
+/* Ensure body allows scrolling */
+body {
+    min-height: 100vh;
+    overflow-y: auto;
 }
