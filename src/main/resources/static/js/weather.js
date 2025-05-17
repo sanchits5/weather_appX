@@ -1,39 +1,25 @@
 const cards = document.querySelectorAll('.card');
-const container = document.querySelector('.container');
-let map, marker, searchTimeout;
-let cityName= city1;
+const container = document.querySelector('.bottom-section');
+let map, marker;
 
-// Function to activate card and show details
+const cityElement = document.querySelector('.cityText');
+const cityName = cityElement ? cityElement.innerText.trim() : '';
+
 function activateCard(card) {
     if (card.classList.contains('active')) {
         deactivateCards();
     } else {
-        cards.forEach(c => {
-            c.classList.remove('active');
-            let details = c.querySelector(".card-details");
-            if (details) details.style.display = "none"; // Hide details when another card is clicked
-        });
-
+        cards.forEach(c => c.classList.remove('active'));
         card.classList.add('active');
         container.classList.add('blur');
-
-        let details = card.querySelector(".card-details");
-        if (details) details.style.display = "block"; // Show details for active card
     }
 }
 
-// Function to reset cards and hide details
 function deactivateCards() {
-    cards.forEach(c => {
-        c.classList.remove('active');
-        let details = c.querySelector(".card-details");
-        if (details) details.style.display = "none"; // Hide details when shrinking
-    });
-
+    cards.forEach(c => c.classList.remove('active'));
     container.classList.remove('blur');
 }
 
-// Event listeners for cards
 cards.forEach(card => {
     card.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -41,28 +27,16 @@ cards.forEach(card => {
     });
 });
 
-// Shrink on outside click
 document.body.addEventListener('click', () => {
     deactivateCards();
 });
 
-// Initialize Leaflet map
 function initializeMap() {
-    map = L.map('map').setView([20, 0], 2);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+    map = L.map('map').setView([0, 0], 2);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
     }).addTo(map);
 }
-
-document.addEventListener("DOMContentLoaded", initializeMap);
-
-// Location search
-//console.log(cityName)
-document.addEventListener("DOMContentLoaded", () => {
-    if (cityName && cityName.trim().length >= 3) {
-        findLocation(cityName.trim());
-    }
-});
 
 async function findLocation(cityName) {
     try {
@@ -82,9 +56,9 @@ async function findLocation(cityName) {
     }
 }
 
-// Hide card details by default
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".card-details").forEach(detail => {
-        detail.style.display = "none";
-    });
+    initializeMap();
+    if (cityName.length >= 3) {
+        findLocation(cityName);
+    }
 });

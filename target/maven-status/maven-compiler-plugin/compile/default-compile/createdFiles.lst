@@ -1,0 +1,10 @@
+com\sanchit\WeatherApp\model\Clouds.class
+com\sanchit\WeatherApp\model\WeatherResponse.class
+com\sanchit\WeatherApp\model\Weather.class
+com\sanchit\WeatherApp\controller\WeatherController.class
+com\sanchit\WeatherApp\model\Main.class
+com\sanchit\WeatherApp\WeatherAppApplication.class
+com\sanchit\WeatherApp\model\Wind.class
+com\sanchit\WeatherApp\model\Sys.class
+com\sanchit\WeatherApp\service\WeatherAppService.class
+com\sanchit\WeatherApp\model\Coord.class

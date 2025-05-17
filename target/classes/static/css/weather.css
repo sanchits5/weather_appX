@@ -1,211 +1,325 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-    overflow-x: hidden;
-}
-
-/* Header */
-.heading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    padding: 15px 0;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-}
-
-/* Grid Layout */
-.container {
-    display: grid;
-    width: 90%;
-    padding: 50px;
-    margin-top: 30px;
-    overflow: hidden;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    gap: 15px;
-    transition: filter 0.3s ease;
-}
-
-/* Card Styling */
-.card,.card1 {
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    width: 100%;
-    height: 250px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    transition: transform 0.3s ease, filter 0.3s ease;
-    cursor: pointer;
-}
-
-
-/* Card Hover Effect */
-.card:hover {
-    transform: scale(1.05);
-}
-
-/* Active Card Expansion */
-.card.active {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: fit-content;
-    height: fit-content;
-    transform: translate(-50%, -50%) scale(1.2);
-    z-index: 10;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-.card-details {
-    display: none;
-    margin-top: 15px; /* Hide details initially */
-}
-
-/* Show details only when card is active */
-.card.active .card-details {
-    display: block;
-}
-
-/* Blur effect on other cards when one is expanded */
-.container.blur .card:not(.active) {
-    filter: blur(5px);
-    pointer-events: none;
-}
-
-.container.blur .card1:not(.active) {
-    filter: blur(5px);
-    pointer-events: none;
-}
-
-
-/* Blur effect on other cards */
-.container.blur .card:not(.active) {
-    filter: blur(7px);
-    pointer-events: none;
-}
-
-/* Map */
-.map {
-    width: 100%;
-    height: 250px;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-/* Typography */
-.p-1 {
-    font-size: 20px;
-    text-decoration: underline;
-    font-weight: bolder;
-    color: #333;
-    margin-top: 5px;
-    font-family: calibri;
-    text-align: center;
-}
-.p-2 {
-    font-size: 12px;
-    color: #333;
-    text-align: center;
-}
-.p-3 {
-    text-align: center;
-}
-
-/* Image */
-.imag1 {
-    display: block;
-    margin: 15px auto;
-    width: 70px;
-    height: 70px;
-    border-radius: 8px;
-}
-
-/* Hide default zoom buttons on Leaflet map */
-.leaflet-touch .leaflet-bar a:first-child {
-    display: none;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-}
-.leaflet-touch .leaflet-bar a:last-child {
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    display: none;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 1024px) {
-    .container {
-        grid-template-columns: repeat(2, 1fr);
+    /* Reset basic styles */
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Quicksand', sans-serif;
+        background-color: rgba(0, 0, 0, 0.3);
+        overflow: hidden;
     }
+    
+    .top-section {
+        position: fixed;
+        left: 0;
+        width: 100%;
+        height: 60%;
+        background: white;
+        color: white;
+        padding: 20px;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    
+    /* Map background full size */
+    #map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height:100%;
+        width: 100%;
+        z-index: 1; /* <-- behind text */
+    }
+    
+ .bottom-section {
+   position: absolute;
+   top: 50%;
+   left: 0;
+   width: 100%;
+   height: 50%;
+   background: rgba(255, 255, 255, 0.7);
+   border-top-left-radius: 50px;
+   border-top-right-radius: 50px;
+   padding: 20px;
+   box-sizing: border-box;
+   z-index: 1; /* This makes sure it's above the video and overlay */
+ }
+
+
+    .video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 105%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
-@media (max-width: 500px) {
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+    .bottom-section::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Glowing Text Animations */
+    @-webkit-keyframes glow {
+        from {
+            text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+        }
+        
+    }
+
+    @-webkit-keyframes glow1 {
+        from {
+            box-shadow: 0 0 10px black, 0 0 20px black, 0 0 30px black;
+        }
+        to {
+            box-shadow: 0 0 20px black, 0 0 30px black, 0 0 40px black;
+        }
+    }
+    
+    /* Temperature Text */
+    .tempText, .n1 {
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        font-size: 70px;
+        font-weight: lighter;
+        color: white;
+        animation: glow 5s ease-in-out infinite alternate;
+        z-index: 2;
+    }
+    
+    /* City Text */
+    .cityText {
+        position: absolute;
+        left: 20px;
+        top: 10px;
+        font-size: 35px;
+        color: white;
+         font-weight: lighter;
+        text-align: left;
+        z-index: 2;
+        animation: glow ease-in-out infinite alternate;
+
+    }
+    
+    /* City Name (Inside cityText maybe) */
+    .cityName {
+        font-size: 60px;
+        font-weight: lighter;
+        color: white;
+        z-index: 2;
+    }
+    
+    /* Grid Container */
     .container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto auto auto auto;
-        gap: 10px;
-        justify-content: center;
-        align-items: center;
-        overflow-y: auto; /* Enables scrolling */
-        max-height: 100vh; /* Prevents overflow issues */
-        padding: 10px;
+        width: 50%;
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: center;
+        gap:15px;
+        transition: filter 0.3s ease;
     }
-
-    .card,.card1 {
+    
+    /* Card Styling */
+    .card{
+        background-color: rgba(0, 0, 0, 0.1);
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
-        padding: 20px;
+        border-radius: 10px;
+        width: 200px;
+        height: 120px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        font-size: 18px;
+        font-weight: bold;
         text-align: center;
+        position: relative;
+        transition: transform 0.3s ease, filter 0.3s ease, width 0.3s ease, height 0.3s ease;
+        cursor: pointer;
+        animation: glow1 10s ease-in-out infinite alternate;
+    }
+    
+    /* Card Hover Effect */
+    .card:hover, .card1:hover {
+        transform: scale(1.05);
+    }
+    
+    /* Card Active (Expanded) */
+    .card.active {
+        position: absolute;
+        top: 5%;
+        left: auto;
+        right: 10%; /* shift towards right */
+        transform: none; /* remove center translate */
+        width: 400px;
+        height: max-content;
+        z-index: 10;
+        background-color:  rgba(0, 0, 0, 0.1);;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        animation: glow1 10s ease-in-out infinite alternate;
+    }
+    /* Card Details */
+    .card-details {
+        display: none;
+        margin-top: 10px; /* <-- make margin smaller */
+        padding: 5px; /* <-- optional: small padding inside */
+    }
+    
+    .card.active .card-details {
+        display: block;
+    }
+    
+    /* Blur effect when card active */
+    .container.blur .card:not(.active),
+    .container.blur .card1:not(.active) {
+        filter: blur(7px);
+        pointer-events: none;
+    }
+    
+    /* Text Styles */
+    .p-1, .p-2, .p-3 {
+        text-align: center;
+        font-family: 'Quicksand', sans-serif;
+        margin: 0; /* <-- remove extra margin */
+        line-height: 1.2; /* <-- tighter line spacing */
+    }
+    
+    .p-1 {
+        font-size: 15px;
+        font-weight: bold;
+        color: white;
+        margin-top: 5px;
+    }
+    
+    .p-2 {
+        font-size: 14px;
+        color: white;
+        font-weight: 300;
+        
+    }
+    
+    .p-3 {
+        font-size: 35px;
+        font-weight: 400;
+        color: white;
     }
 
-    /* First Card - Full Width & Centered */
-    .card:nth-child(1) {
-        grid-column: span 2;
-        margin-top: 30px;
+      .p-4 {
+            font-size: 35px;
+            font-weight: 400;
+            color: white;
+            vertical-align: super;
+        }
+    .p-5{
+                font-size: 50px;
+                font-weight: 400;
+                color: white;
+            }
+
+    /* Image inside Cards */
+    .imag1 {
+        display: block;
+        margin: auto;
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+    }
+    
+    /* Leaflet Map Adjustments */
+    .leaflet-touch .leaflet-bar a:first-child,
+    .leaflet-touch .leaflet-bar a:last-child {
+        display: none;
+    }
+    
+    /* Leaflet Popup Style */
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+        background: rgba(0, 0, 0, 0.3) !important;
+        color: white !important;
     }
 
-    /* Other Cards - Stay in 1 Column */
-    .card:nth-child(3),
-    .card:nth-child(4),
-    .card:nth-child(5),
-    .card:nth-child(6) {
-        grid-column: span 1;
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .bottom-section {
+  position: absolute;
+     height: auto;
+     overflow-y: auto;
+   }
+
+   .card {
+     width: 100%;
+     position: relative;
+     gap: 5px;
+   }
+
+   .card-details {
+     max-height: 0;
+       overflow: hidden;
+       transition: max-height 0.4s ease, opacity 0.4s ease;
+       opacity: 0;
+   }
+
+   .card.active .card-details {
+    max-height: 1000px; /* Increased for flexibility */
+        opacity: 1;
+        gap: 5px;
+   }
+
+  .card.active {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      top: 1%;
+      left: 0.5%;
+      bottom:1%;
     }
 
-    /* Second Card - Full Width (if it's a Map) */
-    .card1:nth-child(2) {
-        grid-column: span 2;
-    }
-}
 
-/* Ensure body allows scrolling */
-body {
-    min-height: 100vh;
-    overflow-y: auto;
+  .container.blur .card:not(.active) {
+    filter: none;
+    pointer-events: auto;
+  }
+
+  .cityText{
+    top:1px;
+    left: 10px;
+    font-size: 30px;
+  }
+
+ .tempText{
+       top: 5px;
+       left: 10px;
+       font-size: 45px;
+       font-weight: bolder;
+   }
+
+  .cityName {
+    font-size: 35px;
+  }
+
+  .p-3, .p-4, .p-5 {
+    font-size: 24px;
+  }
 }

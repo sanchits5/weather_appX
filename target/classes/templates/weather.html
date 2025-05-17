@@ -11,92 +11,100 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
-<div class="heading">
-    <h1 class="p-3"><span th:text="${city}">City</span>, <span th:text="${country}">Country</span> <span th:class="|wi ${weatherIcon} weather-icon|"></span></h1>
+<div class="top-section">
+    <div id="map" class="map"></div>
+    <h1 class="cityText"><span th:text="${city}">City</span>, <span th:text="${country}">Country</span> <span th:class="|wi ${weatherIcon} weather-icon|"></span></h1>
+    <p class="tempText"><span th:text="${temperature}">100</span><span class="p-4">°</span><span class="p-5">C</span></p>
 </div>
-<div class="container">
-    <div class="card">
-        <p class="p-1">Temperature</p>
-        <img src="/images/hot.gif" class="imag1">
-        <div class="title">
-            <p class="p-2"><strong>Temperature:</strong> <span th:text="${temperature}">Temperature</span>°C</p>
-        </div>
-        <div class="card-details">
-            <p class="p-2"><strong>Temperature Feel Like:</strong> <span th:text="${feels_like}">Temperature
-                            Feel Like</span>°C</p>
-            <br>
-            <p class="p-2"><strong>Minimum temperature:</strong> <span th:text="${temp_min}">Minimum
-                            temperature</span>°C</p>
-            <br>
-            <p class="p-2"><strong>Maximum temperature:</strong> <span th:text="${temp_max}">Maximum
-                            temperature</span>°C</p><br>
-            <p class="p-2"><strong>Weather Parameters:</strong> <span th:text="${main}">Weather
-                            Parameters</span></p>
-            <br>
-            <p class="p-2"><strong>Description:</strong> <span
-                    th:text="${weatherDescription}">Description</span></p>
-        </div>
-    </div>
-    <div class="card1">
-        <p>Map View</p>
-        <div id="map" class="map"></div>
-    </div>
-    <div class="card">
-        <p class="p-1">Meteorological Data</p>
-        <img src="/images/wind.gif" class="imag1">
-        <div class="card-details">
-            <p class="p-2"><strong>Humidity:</strong> <span th:text="${humidity}">Humidity</span>%</p>
-            <br>
-            <p class="p-2"><strong>Wind Speed:</strong> <span th:text="${windSpeed}">Wind Speed</span> m/s </p>
-            <br>
-            <p class="p-2"><strong>Wind Direction Degree:</strong> <span th:text="${deg}">Wind Direction
-                            Degree</span></p>
-            <br>
-            <p class="p-2"><strong>Visibility:</strong> <span th:text="${visibility}">Visibility</span> km </p>
-            <br>
-            <p class="p-2"><strong>Wind Gust:</strong> <span th:text="${gust}">Wind Gust</span> m/s </p>
-            <br>
-            <p class="p-2"><strong>Cloudiness:</strong> <span th:text="${clouds}">Cloudiness</span> % </p>
-        </div>
-    </div>
-    <div class="card">
-        <p class="p-1">Barometric Pressure</p>
-        <img src="/images/Meter.gif" class="imag1">
-        <div class="card-details">
-            <p class="p-2"><strong>Atmospheric Pressure:</strong> <span th:text="${pressure}">Atmospheric
-                            Pressure</span> hPa </p>
-            <br>
-            <p class="p-2"><strong>Atmospheric Pressure on Sea Level:</strong> <span
-                    th:text="${sea_level}">Atmospheric Pressure on Sea Level</span> hPa </p>
-            <br>
-            <p class="p-2"><strong>Atmospheric Pressure on Ground Level:</strong> <span
-                    th:text="${grnd_level}">Atmospheric Pressure on Ground Level</span> hPa </p>
-        </div>
-    </div>
-    <div class="card">
-        <p class="p-1">Geographic Coordinates</p>
-        <img src="/images/GeographicalCode.gif" class="imag1">
-        <div class="card-details">
-            <p class="p-2"><strong>Longitude:</strong> <span th:text="${longitude}">Longitude</span>°</p>
-            <br>
-            <p class="p-2"><strong>Latitude:</strong> <span th:text="${latitude}">Latitude</span>°</p>
 
+<div class="bottom-section">
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="/video/new.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Optional: Dark Overlay -->
+    <div class="overlay"></div>
+
+    <div class="container">
+        <div class="card">
+            <p class="p-1">Temperature</p>
+            <img src="/images/hot.gif" class="imag1">
+            <div class="card-details">
+                <p class="p-2"><strong>Temperature Feel Like:</strong> <span th:text="${feels_like}">Temperature
+                            Feel Like</span>°C</p>
+                <br>
+                <p class="p-2"><strong>Minimum temperature:</strong> <span th:text="${temp_min}">Minimum
+                            temperature</span>°C</p>
+                <br>
+                <p class="p-2"><strong>Maximum temperature:</strong> <span th:text="${temp_max}">Maximum
+                            temperature</span>°C</p><br>
+                <p class="p-2"><strong>Weather Parameters:</strong> <span th:text="${main}">Weather
+                            Parameters</span></p>
+                <br>
+                <p class="p-2"><strong>Description:</strong> <span
+                        th:text="${weatherDescription}">Description</span></p>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <p class="p-1">Astronomical Phenomena</p>
-        <img src="/images/SunriseSunset.gif" class="imag1">
-        <div class="card-details">
-            <p class="p-2"><strong>Date(UTC):</strong> <span th:text="${dt}">Date(UTC)</span></p>
-            <br>
-            <p class="p-2"><strong>Sunrise:</strong> <span th:text="${sunrise}">Sunrise</span></p>
-            <br>
-            <p class="p-2"><strong>Sunset:</strong> <span th:text="${sunset}">Sunset</span></p>
-            <br>
-            <p class="p-2"><strong>Timezone:</strong> <span th:text="${timezone}">Timezone</span></p>
+
+        <div class="card">
+            <p class="p-1">Meteorological Data</p>
+            <img src="/images/wind.gif" class="imag1">
+            <div class="card-details">
+                <p class="p-2"><strong>Humidity:</strong> <span th:text="${humidity}">Humidity</span>%</p>
+                <br>
+                <p class="p-2"><strong>Wind Speed:</strong> <span th:text="${windSpeed}">Wind Speed</span> m/s </p>
+                <br>
+                <p class="p-2"><strong>Wind Direction Degree:</strong> <span th:text="${deg}">Wind Direction
+                            Degree</span></p>
+                <br>
+                <p class="p-2"><strong>Visibility:</strong> <span th:text="${visibility}">Visibility</span> km </p>
+                <br>
+                <p class="p-2"><strong>Wind Gust:</strong> <span th:text="${gust}">Wind Gust</span> m/s </p>
+                <br>
+                <p class="p-2"><strong>Cloudiness:</strong> <span th:text="${clouds}">Cloudiness</span> % </p>
+            </div>
+        </div>
+        <div class="card">
+            <p class="p-1">Barometric Pressure</p>
+            <img src="/images/Meter.gif" class="imag1">
+            <div class="card-details">
+                <p class="p-2"><strong>Atmospheric Pressure:</strong> <span th:text="${pressure}">Atmospheric
+                            Pressure</span> hPa </p>
+                <br>
+                <p class="p-2"><strong>Atmospheric Pressure on Sea Level:</strong> <span
+                        th:text="${sea_level}">Atmospheric Pressure on Sea Level</span> hPa </p>
+                <br>
+                <p class="p-2"><strong>Atmospheric Pressure on Ground Level:</strong> <span
+                        th:text="${grnd_level}">Atmospheric Pressure on Ground Level</span> hPa </p>
+            </div>
+        </div>
+        <div class="card">
+            <p class="p-1">Geographic Coordinates</p>
+            <img src="/images/GeographicalCode.gif" class="imag1">
+            <div class="card-details">
+                <p class="p-2"><strong>Longitude:</strong> <span th:text="${longitude}">Longitude</span>°</p>
+                <br>
+                <p class="p-2"><strong>Latitude:</strong> <span th:text="${latitude}">Latitude</span>°</p>
+
+            </div>
+        </div>
+        <div class="card">
+            <p class="p-1">Astronomical Phenomena</p>
+            <img src="/images/SunriseSunset.gif" class="imag1">
+            <div class="card-details">
+                <p class="p-2"><strong>Date(UTC):</strong> <span th:text="${dt}">Date(UTC)</span></p>
+                <br>
+                <p class="p-2"><strong>Sunrise:</strong> <span th:text="${sunrise}">Sunrise</span></p>
+                <br>
+                <p class="p-2"><strong>Sunset:</strong> <span th:text="${sunset}">Sunset</span></p>
+                <br>
+                <p class="p-2"><strong>Timezone:</strong> <span th:text="${timezone}">Timezone</span></p>
+            </div>
         </div>
     </div>
 </div>
+
 <script th:inline="javascript">
     var city1 = /*[[${city}]]*/ 'Mumbai';
 </script>

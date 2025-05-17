@@ -112,8 +112,8 @@ body {
     }
 
     .suggestions {
-        width: 100%; /* Adjusted for smaller screens */
-        position: relative; /* Prevents overflow */
+        width: 100%;
+        position: relative;
     }
 
     .btn-primary {
